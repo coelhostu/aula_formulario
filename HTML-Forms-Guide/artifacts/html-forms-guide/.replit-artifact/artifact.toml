@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Guia de Formulários HTML"
+version = "1.0.0"
+id = "artifacts/html-forms-guide"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24767
+
+[services.development]
+run = "pnpm --filter @workspace/html-forms-guide run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/html-forms-guide", "run", "build" ]
+publicDir = "artifacts/html-forms-guide/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24767"
+BASE_PATH = "/"
