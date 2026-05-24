@@ -2,6 +2,8 @@
 
 Este projeto é um guia educacional prático projetado para aulas de desenvolvimento web sobre **Formulários HTML**. Ele ensina como estruturar formulários acessíveis, semânticos e válidos usando recursos nativos do HTML5.
 
+🔗 **Link para o Guia e Laboratório:** [https://coelhostu.github.io/aula_formulario/](https://coelhostu.github.io/aula_formulario/)
+
 ## 🌟 Recursos
 
 1. **Guia Passo a Passo**: Capítulos interativos abordando tags, inputs, validação nativa e boas práticas.
