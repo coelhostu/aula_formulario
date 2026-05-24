@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Set up Node.js
+        uses: actions/configure-pages@v5
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: 'HTML-Forms-Guide/pnpm-lock.yaml'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: HTML-Forms-Guide
+
+      - name: Build Project
+        run: pnpm run build
+        working-directory: HTML-Forms-Guide
+        env:
+          PORT: 5000
+          BASE_PATH: /aula_formulario/
+
+      - name: Copy index to 404 for routing fallback
+        run: cp artifacts/html-forms-guide/dist/public/index.html artifacts/html-forms-guide/dist/public/404.html
+        working-directory: HTML-Forms-Guide
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'HTML-Forms-Guide/artifacts/html-forms-guide/dist/public'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
