@@ -16,9 +16,9 @@ npx pnpm install
 
 ### 2. Iniciar o projeto
 ```bash
-PORT=5000 BASE_PATH=/ npx pnpm --filter @workspace/html-forms-guide dev
+PORT=8080 BASE_PATH=/ npx pnpm --filter @workspace/html-forms-guide dev
 ```
-Abra seu navegador em [http://localhost:5000](http://localhost:5000) para acessar a página.
+Abra seu navegador em [http://localhost:8080](http://localhost:8080) para acessar a página.
 
 ---
 
